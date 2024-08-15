@@ -3,14 +3,9 @@ import { customElement, property } from "lit/decorators.js"
 
 import style from "./tailwind.global.css?inline"
 
-@customElement("test-component")
-export class TestComponent extends LitElement {
+@customElement("memo-feeds")
+export class MemoFeeds extends LitElement {
   static styles = css`${unsafeCSS(style)}`
-  // static styles = css`
-  //   @tailwind base;
-  //   @tailwind components;
-  //   @tailwind utilities;
-  // `
 
   @property()
   name?: string = "World"

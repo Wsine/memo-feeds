@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
         rollupOptions: {
           input: './src/client.ts',
           output: {
+            dir: './public',
             entryFileNames: 'static/client.js'
           }
         }
@@ -27,4 +28,3 @@ export default defineConfig(({ mode }) => {
     }
   }
 })
-

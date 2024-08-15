@@ -2,7 +2,9 @@
   "name": "memo-feeds",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev:vite & npm run dev:client",
+    "dev:vite": "vite",
+    "dev:client": "vite build --watch --mode client",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
     "deploy": "$npm_execpath run build && wrangler pages deploy"
