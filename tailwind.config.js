@@ -1,7 +1,9 @@
-module.exports = {
-  content: ["src/**/*.{ts,css}"],
+const config = {
+  content: ["src/**/*.{ts,js,css}"],
   theme: {
     extend: {},
   },
   plugins: [],
 }
+
+export default config
