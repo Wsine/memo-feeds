@@ -2,12 +2,15 @@ name = "memo-feeds"
 compatibility_date = "2024-08-15"
 pages_build_output_dir = "./dist"
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+CORS_ORIGIN = "https://blog.wsine.top"
+EXPIRE_DAYS = 7
+TG_BOT_TOKEN = "123456789:abcdefghijklmnopqrstuvwxyzABCDEFGHI"
+TG_USER_ID = "123456789"
 
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "MEMOS"
+id = "b7b6e3d4a3b6436b83904215529e6aae"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
