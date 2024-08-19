@@ -12,6 +12,7 @@
     "deploy": "$npm_execpath run build && wrangler pages deploy"
   },
   "dependencies": {
+    "@lit/task": "^1.0.1",
     "hono": "^4.5.5"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "@faker-js/faker": "^8.4.1",
     "@hono/vite-cloudflare-pages": "^0.4.2",
     "@hono/vite-dev-server": "^0.14.0",
+    "@yaireo/relative-time": "^1.0.4",
     "autoprefixer": "^10.4.20",
     "dotenv": "^16.4.5",
     "lit": "^3.2.0",

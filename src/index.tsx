@@ -14,7 +14,9 @@ const app = new Hono<{ Bindings: Bindings }>()
 app.use(renderer)
 
 app.get('/', (c) => {
-  return c.render(<memo-feeds></memo-feeds>)
+  return c.render(
+    <memo-feeds memo-url="http://localhost:5173"></memo-feeds>
+  )
 })
 
 app.get('/memos', async (c) => {
@@ -77,7 +79,7 @@ app.post('/telegram/webhook/:token', async (c) => {
   const memo = {
     id: message.message_id,  // Unique message identifier
     date: message.date,  // Unix time, integer, always positive
-    from: message.from.username,
+    from: { id: message.from.id, username: message.from.username },
     text: message.text || message.caption || '',
     photos: message.photo || [],
   }
