@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { renderer } from './renderer'
 
 type Bindings = {
@@ -12,6 +13,10 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>()
 
 app.use(renderer)
+app.use('*', async (c, next) => {
+  const corsMiddleware = cors({ origin: c.env.CORS_ORIGIN })
+  return corsMiddleware(c, next)
+})
 
 app.get('/', (c) => {
   return c.render(
