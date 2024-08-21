@@ -62,7 +62,6 @@ const createReplyMessage = (chatId: number, messageId: number) => {
 }
 app.post('/telegram/webhook/:token', async (c) => {
   const token = c.req.param('token')
-  console.log(c.env.TG_BOT_TOKEN)
   if (token !== c.env.TG_BOT_TOKEN) {
     c.status(403)
     return c.json({ message: 'Forbiden: Invalid token'})
@@ -70,7 +69,6 @@ app.post('/telegram/webhook/:token', async (c) => {
 
   const { message } = await c.req.json()
   if (!message) return c.json({ message: 'No message' })
-  console.log(message)
 
   const replyMessage = createReplyMessage(message.chat.id, message.message_id)
   if (message.from.id.toString() !== c.env.TG_USER_ID) {
@@ -81,14 +79,33 @@ app.post('/telegram/webhook/:token', async (c) => {
     date: message.date,  // Unix time, integer, always positive
     from: { id: message.from.id, username: message.from.username },
     text: message.text || message.caption || '',
-    photos: message.photo || [],
+    photos: Array.from(message.photo.reduce((map: any, file: any) => {
+      const fid = file.file_id.split('_')[0]
+      if (!map.has(fid)) {
+        map.set(fid, file)
+      } else {
+        if (map.get(fid).file_size < file.file_size) {
+          map.set(fid, file)
+        }
+      }
+      return map
+    }, new Map()).values()) || [],
   }
+  console.log(memo)
   const expiration = 60 * 60 * 24 * parseInt(c.env.EXPIRE_DAYS)
   const memoKey = message.message_id.toString()
   await c.env.MEMOS.put(memoKey, JSON.stringify(memo), { expirationTtl: expiration })
   return c.json(replyMessage('Success'))
 })
 
-
+app.get('/telegram/file/:file_id', async (c) => {
+  const { file_id } = c.req.param()
+  const tgUrl = "https://api.telegram.org"
+  const token = c.env.TG_BOT_TOKEN
+  return fetch(`${tgUrl}/bot${token}/getFile?file_id=${file_id}`)
+    .then(r => r.json())
+    // .then(s => { console.log(s); return s })
+    .then(f => fetch(`${tgUrl}/file/bot${token}/${f.result.file_path}`))
+})
 
 export default app

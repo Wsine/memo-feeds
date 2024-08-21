@@ -3,11 +3,11 @@ import { customElement, property } from "lit/decorators.js"
 import { Task } from "@lit/task"
 import RelativeTime from '@yaireo/relative-time'
 
-import style from "./tailwind.global.css?inline"
+import style from "./client.css?inline"
 
 @customElement("memo-feeds")
 export class MemoFeeds extends LitElement {
-  static styles = css`${unsafeCSS(style)}`
+  static styles = [css`${unsafeCSS(style)}`]
 
   @property({ type: String, attribute: 'memo-url' })
   memoUrl: string
@@ -43,12 +43,45 @@ export class MemoFeeds extends LitElement {
             <span class="text-sm font-normal text-slate-400">${relativeTime.from(new Date(memo.date))}</span>
           </h4>
           <p class=" text-slate-500">${memo.text}</p>
+          <div class="flex -mx-2" @click=${this._openLightbox}>
+            ${memo.photos.map((photo: any) => html`
+              <div class="w-1/6 px-2">
+                <div class="bg-gray-400">
+                  <div class="image-wrapper cursor-zoom-in">
+                    <img alt="Placeholder" class="object-fit w-full" src="${this.memoUrl}/telegram/file/${photo.file_id}">
+                  </div>
+                </div>
+              </div>
+            `)}
+          </div>
         </div>
       </li>
     `)
   })}
 </ul>
 <!-- End User feed -->
+<div id="lightbox" class="lightbox" @click=${this._closeLightbox}></div>
     `
+  }
+
+  firstUpdated() {
+    this.$lightbox = this.shadowRoot.getElementById('lightbox')
+  }
+
+  _openLightbox = (e: Event) => {
+    const imageWrapper = e.target.closest('.image-wrapper');
+    if (imageWrapper) {
+      const image = imageWrapper.querySelector('img');
+      if (image) {
+        this.$lightbox.innerHTML = '<div class="close-lightbox"></div>' + image.outerHTML;
+        this.$lightbox.classList.add('show');
+      }
+    }
+  }
+
+  _closeLightbox = (e: Event) => {
+    if (!e.target.hasAttribute('src')) {
+      this.$lightbox.classList.remove('show');
+    }
   }
 }
