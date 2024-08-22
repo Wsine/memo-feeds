@@ -48,7 +48,7 @@ export class MemoFeeds extends LitElement {
               <div class="w-1/6 px-2">
                 <div class="bg-gray-400">
                   <div class="image-wrapper cursor-zoom-in">
-                    <img alt="Placeholder" class="object-fit w-full" src="${this.memoUrl}/telegram/file/${photo.file_id}">
+                    <img alt="Error" class="object-fit w-full" src="${this.memoUrl}/telegram/file/${photo.file_id}">
                   </div>
                 </div>
               </div>
