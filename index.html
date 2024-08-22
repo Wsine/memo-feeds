@@ -11,7 +11,11 @@
   </head>
   <body>
     <main class="container">
-      <memo-feeds memo-url="http://localhost:8787"></memo-feeds>
+      <% if(isDev){ %>
+        <memo-feeds memo-url="http://localhost:8787"></memo-feeds>
+      <% } else { %>
+        <memo-feeds></memo-feeds>
+      <% } %>
     </main>
   </body>
 </html>

@@ -10,7 +10,7 @@ export class MemoFeeds extends LitElement {
   static styles = [css`${unsafeCSS(style)}`]
 
   @property({ type: String, attribute: 'memo-url' })
-  memoUrl: string
+  memoUrl: string = ""
 
   private _fetchMemosTask = new Task(this, {
     task: async ([url], {signal}) => {
