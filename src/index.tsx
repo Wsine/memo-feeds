@@ -88,4 +88,15 @@ app.get('/telegram/file/:file_id', async (c) => {
   return new Response(resp.body, resp)
 })
 
+app.get('/telegram/avatar/:user_id', async (c) => {
+  const { user_id } = c.req.param()
+  const tgUrl = "https://api.telegram.org"
+  const token = c.env.TG_BOT_TOKEN
+  const resp: any = await fetch(`${tgUrl}/bot${token}/getUserProfilePhotos?user_id=${user_id}`)
+    .then(r => r.json())
+    // .then(s => { console.log(s.result.photos); return s })
+  const avatar = resp.result.photos[0].at(-1).file_id
+  return c.redirect(`/telegram/file/${avatar}`)
+})
+
 export default app
