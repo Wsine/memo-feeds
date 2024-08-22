@@ -2,12 +2,13 @@
   "name": "memo-feeds",
   "type": "module",
   "scripts": {
-    "dev": "npm run dev:vite & npm run dev:client",
+    "dev": "npm run dev:vite & npm run dev:wrangler",
     "dev:vite": "vite",
-    "dev:client": "vite build --watch --mode client",
+    "dev:wrangler": "wrangler dev",
     "tunnel": "ssh -R 80:localhost:5173 localhost.run",
     "test": "echo 'npx zx test/<module>.mjs [parameters]'",
-    "build": "vite build --mode client && vite build",
+    "clear": "rm -r .wrangler/state",
+    "build": "vite build",
     "preview": "wrangler pages dev",
     "deploy": "$npm_execpath run build && wrangler pages deploy"
   },

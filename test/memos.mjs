@@ -1,8 +1,8 @@
 #!/usr/bin/env zx
 
-require('dotenv').config({ path: ['.env.local'] })
+require('dotenv').config({ path: ['.dev.vars'] })
 
-const baseUrl = 'http://localhost:5173'
+const baseUrl = 'http://localhost:8787'
 
 if (argv.delete) {
   await fetch(`${baseUrl}/memos/delete`, {

@@ -1,8 +1,8 @@
 #!/usr/bin/env zx
 
-require('dotenv').config({ path: ['.env.local'] })
+require('dotenv').config({ path: ['.dev.vars'] })
 
-const baseUrl = 'https://api.telegram.org'
+const tgUrl = 'https://api.telegram.org'
 
 console.log(argv)
 if (argv._.length === 0) {
@@ -12,6 +12,6 @@ if (argv._.length === 0) {
 const tunnel = argv._[0]
 console.log(tunnel)
 
-await fetch(`${baseUrl}/bot${process.env.TG_BOT_TOKEN}/setWebhook?url=${tunnel}/telegram/webhook/${process.env.TG_BOT_TOKEN}`, {
+await fetch(`${tgUrl}/bot${process.env.TG_BOT_TOKEN}/setWebhook?url=${tunnel}/telegram/webhook/${process.env.TG_BOT_TOKEN}`, {
   method: 'POST',
 }).then(res => res.json()).then(console.log)

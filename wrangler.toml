@@ -1,16 +1,16 @@
 name = "memo-feeds"
-compatibility_date = "2024-08-15"
-pages_build_output_dir = "./dist"
+main = "src/index.tsx"
+compatibility_date = "2024-08-06"
 
 [vars]
-CORS_ORIGIN = "https://blog.wsine.top"
-EXPIRE_DAYS = 7
-TG_BOT_TOKEN = "123456789:abcdefghijklmnopqrstuvwxyzABCDEFGHI"
-TG_USER_ID = "123456789"
+EXPIRE_DAYS = "7"
+# CORS_ORIGIN = "https://example.com"
+# TG_BOT_TOKEN = "123456789:abcdefghijklmnopqrstuvwxyzABCDEFGHI"
+# TG_USER_ID = "123456789"
 
 [[kv_namespaces]]
 binding = "MEMOS"
-id = "b7b6e3d4a3b6436b83904215529e6aae"
+id = "ec108d488ca4440fb47035ba1f1e8fc3"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"

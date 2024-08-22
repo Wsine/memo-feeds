@@ -9,7 +9,9 @@
     "useDefineForClassFields": false,
     "strictPropertyInitialization": false,
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
     ],
     "types": [
       "@cloudflare/workers-types/2023-07-01",
@@ -18,4 +20,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
   },
+  "include": ["src"]
 }

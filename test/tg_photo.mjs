@@ -2,9 +2,9 @@
 
 import { faker } from '@faker-js/faker'
 
-require('dotenv').config({ path: ['.env.local'] })
+require('dotenv').config({ path: ['.dev.vars'] })
 
-const baseUrl = 'http://localhost:5173'
+const baseUrl = 'http://localhost:8787'
 // refer: https://core.telegram.org/constructor/message
 const payload = {
   message: {

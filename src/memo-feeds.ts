@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js"
 import { Task } from "@lit/task"
 import RelativeTime from '@yaireo/relative-time'
 
-import style from "./client.css?inline"
+import style from "./tailwind.global.css?inline"
 
 @customElement("memo-feeds")
 export class MemoFeeds extends LitElement {
