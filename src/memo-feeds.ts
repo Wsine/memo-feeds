@@ -40,7 +40,7 @@ export class MemoFeeds extends LitElement {
           </a>
           <h4 class="flex flex-col items-start text-lg font-medium leading-8 lg:items-center md:flex-row text-slate-700">
             <span class="flex-1">${memo.from.username}</span>
-            <span class="text-sm font-normal text-slate-400">${relativeTime.from(new Date(memo.date))}</span>
+            <span class="text-sm font-normal text-slate-400">${relativeTime.from(new Date(memo.date * 1000))}</span>
           </h4>
           <p class=" text-slate-500">${memo.text}</p>
           <div class="flex -mx-2" @click=${this._openLightbox}>

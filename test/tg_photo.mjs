@@ -22,7 +22,7 @@ const payload = {
       username: faker.internet.userName(),
       type: 'private'
     },
-    date: Date.now(),
+    date: Math.floor(Date.now() / 1000),
     photo: [
       {
         file_id: 'AgACAgUAAxkBAAMLZsMjBLVKCYgrkusRIHPBx6V1iPQAAmbEMRvlRRhWvjxFF1C7_DYBAAMCAANzAAM1BA',

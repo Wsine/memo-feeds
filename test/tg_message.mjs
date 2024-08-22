@@ -22,7 +22,7 @@ const payload = {
       username: faker.internet.userName(),
       type: 'private'
     },
-    date: Date.now(),
+    date: Math.floor(Date.now() / 1000),
     text: faker.lorem.sentence({ min: 3, max: 15 })
   }
 }

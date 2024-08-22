@@ -14,7 +14,7 @@ const app = new Hono<{ Bindings: Bindings }>()
 
 app.use('*', async (c, next) => {
   const corsMiddleware = cors({
-    origin: ['http://localhost:5173', c.env.CORS_ORIGIN]
+    origin: c.env.CORS_ORIGIN.split(',').map(s => s.trim()),
   })
   return corsMiddleware(c, next)
 })
@@ -50,7 +50,7 @@ app.post('/telegram/webhook/:token', async (c) => {
   if (!message) return c.json({ message: 'No message' })
 
   const replyMessage = createReplyMessage(message.chat.id, message.message_id)
-  if (message.from.id.toString() !== c.env.TG_USER_ID) {
+  if (!c.env.TG_USER_ID.split(',').includes(message.from.id.toString())) {
     return c.json(replyMessage('Invalid user. This is a private bot.'))
   }
   const memo = {

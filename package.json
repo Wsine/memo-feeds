@@ -10,7 +10,7 @@
     "clear": "rm -r .wrangler/state",
     "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
-    "deploy": "$npm_execpath run build && wrangler pages deploy"
+    "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
     "@lit/task": "^1.0.1",
