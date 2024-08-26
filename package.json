@@ -5,7 +5,7 @@
     "dev": "npm-run-all --parallel dev:vite dev:wrangler",
     "dev:vite": "vite",
     "dev:wrangler": "wrangler dev",
-    "tunnel": "ssh -R 80:localhost:5173 localhost.run",
+    "tunnel": "ssh -R 80:localhost:8787 localhost.run",
     "test": "echo 'npx zx test/<module>.mjs [parameters]'",
     "clear": "rm -r .wrangler/state",
     "build": "vite build --mode client && vite build",

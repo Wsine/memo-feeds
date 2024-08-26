@@ -58,19 +58,8 @@ app.post('/telegram/webhook/:token', async (c) => {
     date: message.date,  // Unix time, integer, always positive
     from: { id: message.from.id, username: message.from.username },
     text: message.text || message.caption || '',
-    photos: Array.from(message.photo?.reduce((map: any, file: any) => {
-      const fid = file.file_id.split('_')[0]
-      if (!map.has(fid)) {
-        map.set(fid, file)
-      } else {
-        if (map.get(fid).file_size < file.file_size) {
-          map.set(fid, file)
-        }
-      }
-      return map
-    }, new Map()).values() || []),
+    photos: Array.isArray(message.photo) ? [message.photo.at(-1)] : [],
   }
-  console.log(memo)
   const expiration = 60 * 60 * 24 * parseInt(c.env.EXPIRE_DAYS)
   const memoKey = message.message_id.toString()
   await c.env.MEMOS.put(memoKey, JSON.stringify(memo), { expirationTtl: expiration })
