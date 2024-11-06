@@ -32,7 +32,7 @@ export class MemoFeeds extends LitElement {
         </div>
       </li>
     `,
-    complete: (memos: any) => memos.map((memo: any) => html`
+    complete: (memos: any) => memos.length ? memos.map((memo: any) => html`
       <li role="article" class="relative pl-8 ">
         <div class="flex flex-col flex-1 gap-4">
           <a href="#" class="absolute z-10 inline-flex items-center justify-center w-8 h-8 text-white rounded-full -left-4 ring-2 ring-white">
@@ -56,7 +56,13 @@ export class MemoFeeds extends LitElement {
           </div>
         </div>
       </li>
-    `)
+    `) : html`
+      <li role="article" class="relative pl-8 ">
+        <div class="flex flex-col flex-1 gap-4">
+          <p class=" text-slate-500">No feeds in recent.</p>
+        </div>
+      </li>
+    `
   })}
 </ul>
 <!-- End User feed -->
@@ -73,7 +79,8 @@ export class MemoFeeds extends LitElement {
     if (imageWrapper) {
       const image = imageWrapper.querySelector('img');
       if (image) {
-        this.$lightbox.innerHTML = '<div class="close-lightbox"></div>' + image.outerHTML;
+        const img = `<img src="${image.getAttribute('src')}">`;
+        this.$lightbox.innerHTML = '<div class="close-lightbox"></div>' + img;
         this.$lightbox.classList.add('show');
       }
     }
